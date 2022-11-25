@@ -45,28 +45,33 @@ class Field {
                     break;
             }
 
-            let newPosition = this._field[pointer.posV][pointer.posH]; // store array coordinates in a variable
-            switch (newPosition) { // Methods to test whether the current location results in win (user is on the hat) or a loss (user is on a hole or out-of-bounds).
-                case hat:
-                    endGame = true;
-                    prompt("You found your hat!!");
-                    break;
-                case hole:
-                    endGame = true;
-                    prompt("You fell through a hole!! GAME OVER");
-                    break;
-                case fieldCharacter:
-                    this._field[pointer.posV][pointer.posH] = pathCharacter; //updates curson new possition with *
-                    break;
-                case undefined:
-                    endGame = true;
-                    prompt("You fell out of the field!! GAME OVER");
-                    break;
+            try {// going out of the field on the vertical axis throws and error. This try...catch statement handles it
+                let newPosition = this._field[pointer.posV][pointer.posH]; // store array coordinates in a variable
+                switch (newPosition) { // Methods to test whether the current location results in win (user is on the hat) or a loss (user is on a hole or out-of-bounds).
+                    case hat:
+                        endGame = true;
+                        prompt("You found your hat!!");
+                        break;
+                    case hole:
+                        endGame = true;
+                        prompt("You fell through a hole!! GAME OVER");
+                        break;
+                    case fieldCharacter:
+                        this._field[pointer.posV][pointer.posH] = pathCharacter; //updates curson new possition with *
+                        break;
+                    case undefined:
+                        endGame = true;
+                        prompt("You fell out of the field!! GAME OVER");
+                        break;
                     case pathCharacter:
                         endGame = true;
                         prompt("You got lost!! GAME OVER")
-                default:
-                    break;
+                    default:
+                        break;
+                }
+            } catch (e) {
+                endGame = true;
+                prompt("You fell out of the field!! GAME OVER");
             }
             console.clear(); // refresh the console
         }
@@ -86,10 +91,15 @@ class Field {
 }
 
 
+// const generateField = (v, h) => {
+
+// }
+
+
 const myField = new Field([
-    ['*', '░', 'O'],
+    ['*', '░', '░'],
     ['░', 'O', '░'],
-    ['░', '^', '░'],
+    ['░', '^', '░']
 ]);
 
 myField.print();
