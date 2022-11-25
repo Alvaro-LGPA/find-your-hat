@@ -45,7 +45,7 @@ class Field {
                     break;
             }
 
-            try {// going out of the field on the vertical axis throws and error. This try...catch statement handles it
+            try {// going out of the field on the vertical axis throws and error. This try...catch statement handles it.
                 let newPosition = this._field[pointer.posV][pointer.posH]; // store array coordinates in a variable
                 switch (newPosition) { // Methods to test whether the current location results in win (user is on the hat) or a loss (user is on a hole or out-of-bounds).
                     case hat:
