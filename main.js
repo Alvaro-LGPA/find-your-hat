@@ -20,27 +20,6 @@ class Field {
 
         while (endGame === false) {
 
-            let newPosition = this._field[pointer.posV][pointer.posH]; // store array coordinates in a variable
-            console.log(`newposition: ${newPosition}`);
-            switch (newPosition) { // Methods to test whether the current location results in win (user is on the hat) or a loss (user is on a hole or out-of-bounds).
-                case hat:
-                    endGame = true;
-                    console.log("You found your hat!!");
-                    break;
-                case hole:
-                    endGame = true;
-                    console.log("You fell through a hole!! GAME OVER");
-                    break;
-                case fieldCharacter:
-                    this._field[pointer.posV][pointer.posH] = pathCharacter; //updates curson new possition with *
-                    break;
-                case undefined:
-                    endGame = true;
-                    console.log("You fell out of the field!! GAME OVER");
-                default:
-                    break;
-            }
-
             for (let i = 0; i < this._field.length; i++) {
                 console.log(this._field[i].join(""))
             };
@@ -52,20 +31,40 @@ class Field {
             switch (cta) {
                 case "u":
                     pointer.posV--; // move up
-                    console.log(`switch posV after: ${pointer.posV}`);
                     break;
                 case "d":
                     pointer.posV++; // move down
-                    console.log(`posV after: ${pointer.posV}`);
                     break;
                 case "l":
                     pointer.posH--; // move left
-                    console.log(`posH after: ${pointer.posH}`);
                     break;
                 case "r":
                     pointer.posH++; // move right
-                    console.log(`posH after: ${pointer.posH}`);
                     break;
+                default:
+                    break;
+            }
+
+            let newPosition = this._field[pointer.posV][pointer.posH]; // store array coordinates in a variable
+            switch (newPosition) { // Methods to test whether the current location results in win (user is on the hat) or a loss (user is on a hole or out-of-bounds).
+                case hat:
+                    endGame = true;
+                    prompt("You found your hat!!");
+                    break;
+                case hole:
+                    endGame = true;
+                    prompt("You fell through a hole!! GAME OVER");
+                    break;
+                case fieldCharacter:
+                    this._field[pointer.posV][pointer.posH] = pathCharacter; //updates curson new possition with *
+                    break;
+                case undefined:
+                    endGame = true;
+                    prompt("You fell out of the field!! GAME OVER");
+                    break;
+                    case pathCharacter:
+                        endGame = true;
+                        prompt("You got lost!! GAME OVER")
                 default:
                     break;
             }
